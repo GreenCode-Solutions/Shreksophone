@@ -1,0 +1,12 @@
+body {
+  background-color: black;
+}
+button {
+  height: calc(100vh / 8);
+  width: calc(100vw / 8);
+  background-color: green;
+  position: absolute;
+  padding: 0%;
+  margin: 0%;
+  border: none;
+}
