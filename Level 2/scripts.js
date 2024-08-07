@@ -8,12 +8,23 @@ document.addEventListener("DOMContentLoaded", function() {
       this.posY = posY;
       this.next = PointsTo;
       this.tilt = tilt; 
-      this.arrowDOM = 
+      this.arrowDOM = arrowDOM
     }
   }
 
-  function generateArrows() {
+  function calculateElements() {
+    const minElements = 40;
+    const maxElements = 80;
+    const maxRatio = 1.05;
+    const minRatio = .95;
     
+    // for (let i = 0; true; i++) {
+      
+    // }
   }
+  
+  const result = calculateElements();
+  console.log(result);
+  
 
 });
