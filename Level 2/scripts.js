@@ -7,13 +7,12 @@ document.addEventListener("DOMContentLoaded", function() {
       this.posX = posX;
       this.posY = posY;
       this.next = PointsTo;
-      this.tilt = tilt;
+      this.tilt = tilt; 
+      this.arrowDOM = 
     }
   }
 
-  function generateArrows() {
-    for ()
-  }
+  function generateArrows()
 
 
 });
