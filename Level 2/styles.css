@@ -2,7 +2,7 @@ body {
   background-color:green;
 } 
 
-.test {
-  transform: rotate(deg);
+img {
   position: absolute;
+  
 }
