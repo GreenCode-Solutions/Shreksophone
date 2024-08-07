@@ -12,7 +12,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  function generateArrows()
-
+  function generateArrows() {
+    
+  }
 
 });
