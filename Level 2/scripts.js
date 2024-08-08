@@ -1,42 +1,53 @@
 document.addEventListener("DOMContentLoaded", function() {
   let arrows = [];
-  let screenDimensions = [fractionAspectRatio()[0],fractionAspectRatio()[1]];
+  let screenDimensions = [];
   let positions = [];
-  let imgDimensions = [calculateImageDimensions()[0], calculateImageDimensions()[1]];
+
+  function gcd(a, b) {
+    return b === 0 ? a : gcd(b, a % b);
+  }
 
 
   class Arrow {
-    constructor(X, Y, PointsTo = [null, null], tilt = null, arrowDOM){
-      this.posX = X;
-      this.posY = Y;
+    constructor(posX, posY, PointsTo = null, tilt, arrowDOM = null){
+      this.posX = posX;
+      this.posY = posY;
       this.next = PointsTo;
       this.tilt = tilt; 
       this.arrowDOM = arrowDOM;
     }
   }
 
-  function fractionAspectRatio() {  
-    function gcd(a, b) {
-      return b === 0 ? a : gcd(b, a % b);
-    }
-
+  function fractionAspectRatio() {
     const divisor = gcd(screen.availHeight, screen.availWidth);
     const width = screen.availWidth / divisor;
     const height = screen.availHeight / divisor;
-    return { width, height }; 
+    return {width, height}; 
   }
 
-  function calculateImageDimensions() {
+  function calculateImageHeightWidth() {
+    const minElements = 40;
+    const maxElements = 80;
+    const maxRatio = 1.05;
+    const minRatio = .95;
     const {width, height} = fractionAspectRatio();
     let   {widthImages, heightImages} = 0;  
-    widthImages = screen.availWidth/width;
-    heightImages = screen.availHeight/height;
-    return { widthImages, heightImages };
+    let correctRatio = false;
+
+    for (let i = 0; correctRatio == false; i++) {
+      widthImages = screen.availWidth/width;
+      heightImages = screen.availHeight/height;
+      if (maxRatio > widthImages/heightImages > minRatio && minElements < width*height < maxElements) {
+        correctRatio = true;
+      }
+    }
+
+    return { width, height };
   }
   
   function makePositions() {
-    for (let x = 0; x < screenDimensions[0]; x++) {
-      for (let y = 0; y < screenDimensions[1]; y++) {
+    for (let x = 0; x < calculateImageHeightWidth()[0]; x++) {
+      for (let y = 0; y < calculateImageHeightWidth()[1]; y++) {
         positions.push({ x: x, y: y });
       }
     }
@@ -53,23 +64,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function generateArrows() {
     makePositions();
-    for (let i = 0; i < positions.length; i++) {
-      let arrowDOM = document.createElement("img")
-      arrowDOM.class = 'arrow';
-      arrowDOM.style.left = `${imgDimensions[0] * positions[i][0]}px`;
-      arrowDOM.style.top = `${imgDimensions[1] * positions[i][1]}px`;
-      if (arrows.length == 0) {
-        arrows.push(new Arrow(X=positions[i][0], Y=positions[i][1], arrowDOM=arrowDOM));
-      } else {
-        
-      }
-      
-      
-    }
+    document.img.style = `width: ${screen.availWidth/calculateImageHeightWidth()[0]}px; height:
+    ${screen.availHeight/calculateImageHeightWidth()[1]}px`;
+    for (let i = 0; i < positions.length; i++)
+      arrows.push(new Arrow())
 
   }
 
-  const result = calculateImageDimensions();
+  const result = calculateImageHeightWidth();
   console.log(result);
   generateArrows();
 });
