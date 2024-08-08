@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
   let arrows = [];
-  let screenDimensions = [fractionAspectRatio()[0],fractionAspectRatio()[1]];
+  let screenDimensions = [fractionAspectRatio().width, fractionAspectRatio().height];
   let positions = [];
-  let imgDimensions = [calculateImageDimensions()[0], calculateImageDimensions()[1]];
+  let imgDimensions = [calculateImageDimensions().widthImages, calculateImageDimensions().heightImages];
 
 
   class Arrow {
@@ -55,21 +55,24 @@ document.addEventListener("DOMContentLoaded", function() {
     makePositions();
     for (let i = 0; i < positions.length; i++) {
       let arrowDOM = document.createElement("img")
-      arrowDOM.class = 'arrow';
-      arrowDOM.style.left = `${imgDimensions[0] * positions[i][0]}px`;
-      arrowDOM.style.top = `${imgDimensions[1] * positions[i][1]}px`;
-      if (arrows.length == 0) {
-        arrows.push(new Arrow(X=positions[i][0], Y=positions[i][1], arrowDOM=arrowDOM));
-      } else {
+      arrowDOM.classList.add('arrow');
+      arrowDOM.style.left = `${imgDimensions[0] * positions[i].x}px`;
+      arrowDOM.style.top = `${imgDimensions[1] * positions[i].y}px`;
+      arrowDOM.src = "../Image_Assets/arrow.png";
+      arrowDOM.style.width = `${imgDimensions[0]}`;
+      arrowDOM.style.height = `${imgDimensions[1]}`;
+      document.body.appendChild(arrowDOM);
+      // if (arrows.length == 0) {
+        arrows.push(new Arrow(X=positions[i].x, Y=positions[i].y, arrowDOM=arrowDOM));
+      // } else {
         
-      }
+      // }
       
       
     }
 
   }
-
-  const result = calculateImageDimensions();
-  console.log(result);
+  
+  console.log(positions.length)
   generateArrows();
 });
