@@ -6,37 +6,45 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
   class Arrow {
-    constructor(X, Y, PointsTo = [null, null], tilt = null, arrowDOM){
-      this.posX = X;
-      this.posY = Y;
+    constructor(posX, posY, PointsTo = null, tilt, arrowDOM = null){
+      this.posX = posX;
+      this.posY = posY;
       this.next = PointsTo;
       this.tilt = tilt; 
       this.arrowDOM = arrowDOM;
     }
   }
 
-  function fractionAspectRatio() {  
-    function gcd(a, b) {
-      return b === 0 ? a : gcd(b, a % b);
-    }
-
+  function fractionAspectRatio() {
     const divisor = gcd(screen.availHeight, screen.availWidth);
     const width = screen.availWidth / divisor;
     const height = screen.availHeight / divisor;
-    return { width, height }; 
+    return {width, height}; 
   }
 
-  function calculateImageDimensions() {
+  function calculateImageHeightWidth() {
+    const minElements = 40;
+    const maxElements = 80;
+    const maxRatio = 1.05;
+    const minRatio = .95;
     const {width, height} = fractionAspectRatio();
     let   {widthImages, heightImages} = 0;  
-    widthImages = screen.availWidth/width;
-    heightImages = screen.availHeight/height;
-    return { widthImages, heightImages };
+    let correctRatio = false;
+
+    for (let i = 0; correctRatio == false; i++) {
+      widthImages = screen.availWidth/width;
+      heightImages = screen.availHeight/height;
+      if (maxRatio > widthImages/heightImages > minRatio && minElements < width*height < maxElements) {
+        correctRatio = true;
+      }
+    }
+
+    return { width, height };
   }
   
   function makePositions() {
-    for (let x = 0; x < screenDimensions[0]; x++) {
-      for (let y = 0; y < screenDimensions[1]; y++) {
+    for (let x = 0; x < calculateImageHeightWidth()[0]; x++) {
+      for (let y = 0; y < calculateImageHeightWidth()[1]; y++) {
         positions.push({ x: x, y: y });
       }
     }
