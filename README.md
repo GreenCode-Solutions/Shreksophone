@@ -1,10 +1,10 @@
 # GreenCode Solutions
 
-Welcome to the official GitHub repository of GreenCode Solutions! We are a passionate team of developers committed to delivering high-quality software solutions while promoting sustainable and ethical coding practices.
+Welcome to the official GitHub repository of GreenCode Solutions! We are a passionate team of two solo developers committed to delivering high-quality software solutions while promoting sustainable and ethical coding practices.
 
 ## About GreenCode Solutions
 
-At GreenCode Solutions, we believe in the power of technology to allow people a voice and to further their freedom of expression withing coding. We specialize in building robust, scalable, and environmentally conscious software for a wide range of industries. Our portfolio showcases a variety of projects that highlight our expertise in software development, UX/UI design, and sustainable practices.
+At GreenCode Solutions, we believe in the power of the internet and its ability to further a persons voice, bypass physical barriers and allow people to themselves without fear. We specialize in personal projects such as making a website to showcase your style, places you've been, even setting up a small bussiness . Our portfolio showcases a variety of projects that highlight our expertise in software development, UX/UI design, and sustainable practices.
 
 ### Our Mission
 
