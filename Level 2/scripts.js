@@ -1,9 +1,13 @@
 document.addEventListener("DOMContentLoaded", function() {
   let arrows = [];
-  let screenDimensions = [fractionAspectRatio().width, fractionAspectRatio().height];
+  let screenDimensions = [Math.round(fractionAspectRatio().width * .015) , Math.round(fractionAspectRatio().height * .015)];
+  
   let positions = [];
   let imgDimensions = [calculateImageDimensions().widthImages, calculateImageDimensions().heightImages];
-
+  console.log(window.innerHeight);
+  console.log(window.innerWidth)
+  console.log(window.innerHeight)
+  console.log(window.innerWidth)
 
   class Arrow {
     constructor(posX, posY, PointsTo = null, tilt, arrowDOM = null){
@@ -15,36 +19,28 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  function fractionAspectRatio() {
-    const divisor = gcd(screen.availHeight, screen.availWidth);
-    const width = screen.availWidth / divisor;
-    const height = screen.availHeight / divisor;
-    return {width, height}; 
-  }
-
-  function calculateImageHeightWidth() {
-    const minElements = 40;
-    const maxElements = 80;
-    const maxRatio = 1.05;
-    const minRatio = .95;
-    const {width, height} = fractionAspectRatio();
-    let   {widthImages, heightImages} = 0;  
-    let correctRatio = false;
-
-    for (let i = 0; correctRatio == false; i++) {
-      widthImages = screen.availWidth/width;
-      heightImages = screen.availHeight/height;
-      if (maxRatio > widthImages/heightImages > minRatio && minElements < width*height < maxElements) {
-        correctRatio = true;
-      }
+  function fractionAspectRatio() {  
+    function gcd(a, b) {
+      return b === 0 ? a : gcd(b, a % b);
     }
 
-    return { width, height };
+    const divisor = gcd(window.innerHeight, window.innerWidth);
+
+    const width = window.innerWidth / divisor;
+    const height = window.innerHeight / divisor;
+    return { width, height }; 
   }
+
+  function calculateImageDimensions() { 
+    let widthImages = window.innerWidth/screenDimensions[0];
+    let heightImages = window.innerHeight/screenDimensions[1];
+    return { widthImages, heightImages };
+    
+    }
   
   function makePositions() {
-    for (let x = 0; x < calculateImageHeightWidth()[0]; x++) {
-      for (let y = 0; y < calculateImageHeightWidth()[1]; y++) {
+    for (let x = 0; x < screenDimensions[0]; x++) {
+      for (let y = 0; y < screenDimensions[1]; y++) {
         positions.push({ x: x, y: y });
       }
     }
@@ -67,11 +63,11 @@ document.addEventListener("DOMContentLoaded", function() {
       arrowDOM.style.left = `${imgDimensions[0] * positions[i].x}px`;
       arrowDOM.style.top = `${imgDimensions[1] * positions[i].y}px`;
       arrowDOM.src = "../Image_Assets/arrow.png";
-      arrowDOM.style.width = `${imgDimensions[0]}`;
-      arrowDOM.style.height = `${imgDimensions[1]}`;
+      arrowDOM.style.width = `${imgDimensions[0]}px`;
+      arrowDOM.style.height = `${imgDimensions[1]}px`;
       document.body.appendChild(arrowDOM);
       // if (arrows.length == 0) {
-        arrows.push(new Arrow(X=positions[i].x, Y=positions[i].y, arrowDOM=arrowDOM));
+        arrows.push(new Arrow(positions[i].x, positions[i].y, [null, null], null, arrowDOM));
       // } else {
         
       // }
@@ -81,6 +77,5 @@ document.addEventListener("DOMContentLoaded", function() {
 
   }
   
-  console.log(positions.length)
   generateArrows();
 });
