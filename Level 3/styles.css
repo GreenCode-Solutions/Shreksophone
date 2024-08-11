@@ -1,0 +1,11 @@
+body {
+  background-color: green;
+  overflow: hidden;
+}
+img {
+  position:absolute;
+  border-radius: 100%;
+}
+.arrow {
+  position: absolute;
+}
