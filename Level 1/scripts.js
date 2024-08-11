@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function addNewButton() {
 
-    let { x, y } = positions.pop();
+    
 
     if (positions.length === 0) {
       setTimeout(function() {
@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
       return;
     }
 
+    let { x, y } = positions.pop();
     // Take the first position from shuffled array
     let button = document.createElement("button");
     button.style.left = `calc(${100 * x / 8}vw)`;
@@ -79,13 +80,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function resetButtons() {
     for (let i = 0; i < buttons.length; i++) {
-      removeElement(buttons[i].button); // Pass the button DOM element
+      removeElement(buttons[i].button); 
     }
 
     buttons = [];
     positions = [];
     makePositions();
-    // shuffle array
+    
     shuffleArray(positions);
     addNewButton();
 
