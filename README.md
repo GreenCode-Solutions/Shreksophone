@@ -4,17 +4,16 @@ Welcome to the official GitHub repository of GreenCode Solutions! We are a passi
 
 ## About GreenCode Solutions
 
-At GreenCode Solutions, we believe in the power of technology to allow people a voice and to further their freedom of expression withing coding. We specialize in building robust, scalable, and environmentally conscious software for a wide range of industries. Our portfolio showcases a variety of projects that highlight our expertise in software development, UX/UI design, and sustainable practices.
+At GreenCode Solutions, we believe in the power of technology to allow people a voice and to further the freedom of expression through coding. We specialize in building personal websites for small bussinesses, friends and family, even just for inside jokes. Our portfolio showcases a variety of projects that highlight our expertise in software development, UX/UI design, and sustainable practices.
 
 ### Our Mission
 
 - **Sustainability**: We integrate eco-friendly practices into our development process, aiming to reduce the environmental impact of technology.
 - **Quality**: We deliver exceptional code that meets industry standards and exceeds client expectations.
-- **Community**: We support the open-source community and contribute to projects that align with our values.
 
 ## Showcase Project
 
-This repository features a sample project from our portfolio, demonstrating our capabilities and approach to software development. Whether you’re a potential client or a fellow developer, we hope this project gives you a glimpse of what GreenCode Solutions can do.
+This repository features a sample project from our portfolio, demonstrating our capabilities and approach to software development. Whether you’re a potential client or a fellow developer, we hope this project gives you a glimpse of what GreenCode Solutions can do and what it's about.
 
 ## Our Services
 
