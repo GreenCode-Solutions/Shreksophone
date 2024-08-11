@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
   let selectedStart = [];
   let positions = [];
   let imgDimensions = [calculateImageDimensions().widthImages, calculateImageDimensions().heightImages];
+
   console.log(imgDimensions[0] / imgDimensions[1]);
   console.log(screenDimensions);
   console.log([window.innerWidth, window.innerHeight])
@@ -32,9 +33,9 @@ document.addEventListener("DOMContentLoaded", function() {
         pointsTo = this.next;
         this.arrowDOM.style.filter = "drop-shadow(0 0 0.75rem black)";
         this.arrowDOM.src = "../Image_Assets/arrowGreen.png";
-        this.arrowDOM.style.zIndex = "4";
         return;
       }
+
       if (this.position == selectedStart) {
         //endscreen();
         location.reload();
@@ -66,11 +67,14 @@ document.addEventListener("DOMContentLoaded", function() {
     let bestFit = { width: 1, height: 1 };
     let bestImageRatio = Infinity;
 
-    for (let cols = 1; cols <= 50; cols++) {
+    const maxImages = 50;
+    const minImages = 20;
+
+    for (let cols = 1; cols <= 10000 ; cols++) {
       let rows = Math.round(cols * (window.innerHeight / window.innerWidth));
       let arrowCount = cols * rows;
 
-      if (arrowCount >= 20 && arrowCount <= 50) {
+      if (arrowCount >= minImages && arrowCount <= maxImages) {
         let imageRatio = (window.innerWidth / cols) / (window.innerWidth / rows);
 
 
