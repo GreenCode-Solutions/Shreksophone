@@ -5,5 +5,10 @@ div {
   border-radius: 100%;
   position: absolute;
   border: none;
-  background-color: red;
+  background-color: rgb(32, 164, 32);
+  /* animation: highlight .5s ease-out 1 forwards; */
+}
+@keyframes highlight {
+  from {background-color: rgb(246, 246, 246);}
+  to {background-color: rgb(32, 164, 32);}
 }
