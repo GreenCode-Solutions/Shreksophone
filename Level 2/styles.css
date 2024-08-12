@@ -1,0 +1,9 @@
+body {
+  background-color: green;
+}
+div {
+  border-radius: 100%;
+  position: absolute;
+  border: none;
+  background-color: red;
+}
