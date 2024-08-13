@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (pattern.length == 0) {
           patternCount++;
           if (patternCount >= circleCount) {
-            passwordThing();  // remember to add the password idea later
+            endScreen();  // remember to add the password idea later
           }
           displayPattern(generatePattern());
         }
@@ -74,6 +74,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     return bestFit;
+  }
+
+  function endScreen() {
+    window.location("../index.html");
   }
 
   function generateCircles() {
