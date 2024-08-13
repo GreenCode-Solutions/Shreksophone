@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let passLength = Math.floor(Math.random() * (maxChars - minChars) + minChars)
     let password = ""
     for (let i = 0; i < passLength; i++) {
-      password.concat(chars[Math.floor(Math.random() * chars.length)])
+      password = password.concat(chars[Math.floor(Math.random() * chars.length)])
     }
     return password;
   }
@@ -28,5 +28,6 @@ document.addEventListener("DOMContentLoaded", function() {
   window.squaresPass = getOrGeneratePassword("squaresPass");
   window.circlesPass = getOrGeneratePassword("circlesPass");
   window.arrowsPass = getOrGeneratePassword("ArrowsPass");
+  console.log([window.squaresPass, window.circlesPass, window.arrowsPass])
 
 });

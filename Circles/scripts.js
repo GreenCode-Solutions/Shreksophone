@@ -154,6 +154,8 @@ document.addEventListener("DOMContentLoaded", function() {
   
 
   generateCircles();
+  window.circlesPass = localStorage.getItem("circlesPass");
+  console.log(window.circlesPass)
   setTimeout(() => displayPattern(generatePattern()), 2000);
 
 });

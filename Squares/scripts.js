@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   }
 
-
-
+  window.squaresPass = localStorage.getItem("squaresPass");
+  console.log(window.squaresPass)
   addNewButton();
 });

@@ -145,5 +145,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
   
+  window.arrowsPass = localStorage.getItem("arrowsPass");
+  console.log(window.arrowsPass)
   generateArrows();
 });
