@@ -148,7 +148,8 @@ document.addEventListener("DOMContentLoaded", function() {
     displayPattern(generatePattern()); // Restart with a new pattern
   }
   
+
   generateCircles();
-  displayPattern(generatePattern());
+  setTimeout(() => displayPattern(generatePattern()), 2000);
 
 });

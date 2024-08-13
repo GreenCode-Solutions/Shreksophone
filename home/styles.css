@@ -1,9 +1,16 @@
 body {
     background-color: green;
     font-family: "DM Serif Text", serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
-.title {
+#title {
     margin: auto;
     margin-top: 17%;
     width: 50%;
@@ -13,24 +20,33 @@ body {
     filter: drop-shadow(0 0 10px rgb(0, 255, 0));
 }
 
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: .5vh;
+}
+
 .button {
     font-family: "DM Serif Text", serif;
     margin: 0;
-    position: absolute;
     top: 55%;
     left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    transform: translate(0%,-40vh);
     background-color: lightgreen;
     font-size: 35px;
-    border: 0cap;
+    border: none;
     border-radius: 20px;
     padding: 15px;
-    
+}
+
+.title-animate {
+    animation: title 2s ease forwards; /* Adjust duration and easing as needed */
 }
 
 .button:hover {
     filter: drop-shadow(0 0 0.75rem black);
+    cursor: pointer;
 }
 
 @keyframes title {
