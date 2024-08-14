@@ -12,10 +12,9 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
 </head>
 <body>
-  <script src="home/scripts.js"></script>
-  <h1 id="title">Shreksophone 2</h1>
-
-  <div class="button-container">
+  
+  <div class="container">
+    <h1 id="title">Shreksophone 2</h1>
     <a href="javascript:setTimeout(()=>{window.location = 'Squares/main.html' }, 2000);">
       <button class="button" id="button">Squares</button>
     </a>
@@ -25,7 +24,14 @@
     <a href="javascript:setTimeout(()=>{window.location = 'Arrows/main.html' }, 2000);">
       <button class="button" id="button">Arrows</button>
     </a>
+  
+    <br><br>
+    <div class="input-fields">
+      <input type="password" id="squaresPass">
+      <input type="password" id="circlesPass">
+      <input type="password" id="arrowsPass">
+    </div>
+  <script src="home/scripts.js"></script>
   </div>
-
 </body>
 </html>

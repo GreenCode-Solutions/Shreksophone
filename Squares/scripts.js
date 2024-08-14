@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
-
   let buttons = [];
   let positions = [];
+  window.squaresPass = localStorage.getItem("squaresPass");
 
-  // Generate all possible positions and shuffle them
   function makePositions() {
     for (let x = 0; x < 8; x++) {
       for (let y = 0; y < 8; y++) {
@@ -43,18 +42,15 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function addNewButton() {
-
-    
-
     if (positions.length === 0) {
       setTimeout(function() {
-        window.location = "../Level 2/main.html";
+        endScreen();
       }, 1000);
       return;
     }
 
     let { x, y } = positions.pop();
-    // Take the first position from shuffled array
+
     let button = document.createElement("button");
     button.style.left = `calc(${100 * x / 8}vw)`;
     button.style.top = `calc(${100 * y / 8}vh)`;
@@ -74,7 +70,32 @@ document.addEventListener("DOMContentLoaded", function() {
         document.body.style.backgroundColor = "black";
       }, 1000);
       
+
     }
+
+  }
+
+  function endScreen() {
+    for (let i = 0; i < buttons.length; i++) {
+      removeElement(buttons[i].button); 
+    }
+    document.body.style.background = "black";
+    let passwordElement = document.createElement("h1");
+    let passwordNode = document.createTextNode(`${window.squaresPass}`);
+    passwordElement.appendChild(passwordNode);
+    document.body.appendChild(passwordElement);
+
+    setInterval(() => {
+      if (document.body.style.backgroundColor === 'black') {
+        document.body.style.backgroundColor = 'green';
+      } else {
+        document.body.style.backgroundColor = 'black';
+      }
+    }, 1500);
+    setTimeout(() => {
+      window.location = "../index.html"
+    }, 8900 );
+
 
   }
 
@@ -93,6 +114,6 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   window.squaresPass = localStorage.getItem("squaresPass");
-  console.log(window.squaresPass)
+
   addNewButton();
 });

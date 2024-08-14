@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function() {
       if (patternDisplaying) {
         location.reload();
       }
-
       if (this.posX == pattern[0][0] && this.posY == pattern[0][1]) {
         pattern.splice(0, 1);
         if (pattern.length == 0) {
@@ -152,7 +151,6 @@ document.addEventListener("DOMContentLoaded", function() {
     displayPattern(generatePattern()); // Restart with a new pattern
   }
   
-
   generateCircles();
   window.circlesPass = localStorage.getItem("circlesPass");
   console.log(window.circlesPass)

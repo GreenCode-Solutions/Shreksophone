@@ -37,8 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
 
       if (this.position == selectedStart) {
-        //endscreen();
-        location.reload();
+        endscreen();
       }
       if (this.position != pointsTo) {
         location.reload()
@@ -53,10 +52,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     }
 
-    hover() {
-      
-    }
+  }
 
+  function endscreen() {
+    
   }
 
   function endscreen() {
