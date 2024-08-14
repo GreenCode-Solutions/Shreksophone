@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (event.key == 'Enter') {
       event.preventDefault();
       squaresPassUserInput = event.target.value;
-      checkPassword("squaresPass", squaresPassUserInput, window.squaresPass);
+      checkPassword("squaresButton", squaresPassUserInput, window.squaresPass);
     }
   });
 
@@ -17,7 +17,8 @@ document.addEventListener("DOMContentLoaded", function() {
     if (event.key == 'Enter') {
       event.preventDefault();
       circlesPassUserInput = event.target.value;
-      checkPassword("circlesPass", circlesPassUserInput, window.circlesPass);
+      checkPassword("circlesButton", circlesPassUserInput, window.circlesPass);
+
     }
   });
 
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (event.key == 'Enter') {
       event.preventDefault();
       arrowsPassUserInput = event.target.value;
-      checkPassword("arrowsPass", arrowsPassUserInput, window.arrowsPass);
+      checkPassword("arrowsButton", arrowsPassUserInput, window.arrowsPass);
     }
   });
 
@@ -62,9 +63,12 @@ document.addEventListener("DOMContentLoaded", function() {
   function checkPassword(key, userInput, storedPass) {
     if (userInput === storedPass) {
       console.log(`You got ${key} correct!`);
-    } else {
-      console.log("no");
-    }
+      button = document.getElementById(key)
+      button.textContent = "\u00A0";
+      image = document.createElement("img")
+      image.src = "./Image_Assets/arrow.png";
+      button.appendChild(image)
+    };
   }
   console.log([window.squaresPass, window.circlesPass, window.arrowsPass]);
 

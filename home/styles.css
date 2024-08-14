@@ -8,12 +8,12 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    width: 100vw;
     overflow: hidden;
 }
 
 #title {
     width: 100%;
-    
     font-size: 6.75vw;
     filter: drop-shadow(0 0 10px rgb(0, 255, 0));
     margin-bottom:1%;
@@ -29,16 +29,19 @@ body {
     
 }
 
+.button img {
+    width: 33%;
+    height: 98%;
+}
+
 .button {
     font-family: "DM Serif Text", serif;
-  
     background-color: lightgreen;
     font-size: 3vw;
     height: 10vh;
     width: 15.8vw;
     border: none;
     border-radius: 2vmin;
-    
 }
 
 .title-animate {
@@ -50,10 +53,8 @@ body {
     cursor: pointer;
 }
 
-
-
 .input-fields {
-    margin:0px;
+    margin: 0px;
     border: none;
     outline: 0in;
     margin-top: -15px;
@@ -67,7 +68,7 @@ body {
     outline: 0;
 }
 
-.input-fields input:hover {
+.input-fields input:hover, .input-fields input:active {
     filter: drop-shadow(0 0 0.75rem black);
 }
 
