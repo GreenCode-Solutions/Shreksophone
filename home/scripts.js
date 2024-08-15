@@ -34,11 +34,11 @@ document.addEventListener("DOMContentLoaded", function() {
   function activateAnimation(){
     document.getElementById("title").style.animation = "title 3s 1 forwards";
   }
-
+  
   function generateRandomPassword() {
     const chars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM-_=+0987654321!@#$%^&*()~<>?:;";
-    const maxChars = 17;
-    const minChars = 15;
+    const maxChars = 12;
+    const minChars = 10;
     let passLength = Math.floor(Math.random() * (maxChars - minChars) + minChars);
     let password = "";
     for (let i = 0; i < passLength; i++) {
@@ -46,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     return password;
   }
-
   function getOrGeneratePassword(key) {
     let password = localStorage.getItem(key);
     if (!password) {

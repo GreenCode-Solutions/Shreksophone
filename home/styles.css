@@ -23,10 +23,9 @@ body {
     top: 30%;
     left: 50%;
     width: 100%;
-    position:absolute;
+    position: absolute;
     transform: translate(-50%, -30%);
     text-align: center;
-    
 }
 
 .button img {

@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function() {
   let pattern = []
   const gridSize = [optimalGridSize().width, optimalGridSize().height];
   const circleCount = gridSize[0] * gridSize[1];
-  console.log(circles);
   let patternDisplaying = false;
+  window.circlesPass = localStorage.getItem("circlesPass"); 
 
   class Circle {
     constructor(posX, posY, circleDOM) {
@@ -30,6 +30,8 @@ document.addEventListener("DOMContentLoaded", function() {
       if (patternDisplaying) {
         location.reload();
       }
+
+      endScreen();
       if (this.posX == pattern[0][0] && this.posY == pattern[0][1]) {
         pattern.splice(0, 1);
         if (pattern.length == 0) {
@@ -55,13 +57,12 @@ document.addEventListener("DOMContentLoaded", function() {
   function optimalGridSize() {
     let bestFit = { width: 1, height: 1 };
     let bestImageRatio = Infinity;
-    const maxCircles = 80;
-    const minCircles = 60;
+    const maxCircles = 1;
+    const minCircles = 1;
 
-    for (let cols = 1; cols <= 100; cols++) {
+    for (let cols = 1; cols <= maxCircles; cols++) {
       let rows = Math.round(cols * (window.innerHeight / window.innerWidth));
       let circleCount = cols * rows;
-
       if (circleCount >= minCircles && circleCount <= maxCircles) {
         let imageRatio = (window.innerWidth / cols) / (window.innerHeight / rows);
 
@@ -75,15 +76,36 @@ document.addEventListener("DOMContentLoaded", function() {
     return bestFit;
   }
 
+  function removeElement(ele) {
+    ele.parentNode.removeChild(ele);
+  }
+
   function endScreen() {
-    window.location("../index.html");
+    for (let i = 0; i < circles.length; i++) {
+      removeElement(circles[i].circleDOM);
+    }
+    document.body.style.background = "black";
+    let passwordElement = document.createElement("h1");
+    let passwordNode = document.createTextNode(`${window.circlesPass}`);
+    passwordElement.appendChild(passwordNode);
+    document.body.appendChild(passwordElement);
+
+    setInterval(() => {
+      if (document.body.style.backgroundColor === 'black') {
+        document.body.style.backgroundColor = 'green';
+      } else {
+        document.body.style.backgroundColor = 'black';
+      }
+    }, 1500);
+    setTimeout(() => {
+      window.location = "../index.html"
+    }, 8900 );
   }
 
   function generateCircles() {
-    const circleSize = (window.innerHeight + window.innerWidth) / (gridSize[0] * gridSize[1]) * 3;
     const horizontalSpacing = window.innerWidth / gridSize[0];
     const verticalSpacing = window.innerHeight / gridSize[1];
-    console.log(circleSize);
+    const circleSize = Math.min(horizontalSpacing, verticalSpacing) * 0.8;
 
     for (let i = 0; i < gridSize[0]; i++) {
       for (let j = 0; j < gridSize[1]; j++) {
@@ -119,7 +141,6 @@ document.addEventListener("DOMContentLoaded", function() {
       pattern.push(randCoord);
       avialibleCoords.splice(avialibleCoords.indexOf(randCoord), 1);
     }
-    console.log(pattern)
     return pattern;
   }
 
@@ -151,9 +172,8 @@ document.addEventListener("DOMContentLoaded", function() {
     displayPattern(generatePattern()); // Restart with a new pattern
   }
   
+
   generateCircles();
-  window.circlesPass = localStorage.getItem("circlesPass");
-  console.log(window.circlesPass)
   setTimeout(() => displayPattern(generatePattern()), 2000);
 
 });

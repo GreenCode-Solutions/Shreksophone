@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }
   }
+
   makePositions()
   shuffleArray(positions);
 
@@ -95,8 +96,6 @@ document.addEventListener("DOMContentLoaded", function() {
     setTimeout(() => {
       window.location = "../index.html"
     }, 8900 );
-
-
   }
 
   function resetButtons() {
