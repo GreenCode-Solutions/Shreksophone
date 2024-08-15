@@ -5,10 +5,11 @@ document.addEventListener("DOMContentLoaded", function() {
   let selectedStart = [];
   let positions = [];
   let imgDimensions = [calculateImageDimensions().widthImages, calculateImageDimensions().heightImages];
+  window.arrowsPass = localStorage.getItem("arrowsPass");
 
   console.log(imgDimensions[0] / imgDimensions[1]);
   console.log(screenDimensions);
-  console.log([window.innerWidth, window.innerHeight])
+  console.log([window.innerWidth, window.innerHeight]);
 
   class Arrow {
     constructor(position = {x:x, y:y}, PointsTo = {x:x, y:y}, arrowDOM = null) {
@@ -24,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function() {
         tiltDeg -=180;
       }
       return -tiltDeg;
-
     }
 
     onClick() {
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
         endscreen();
       }
       if (this.position != pointsTo) {
-        location.reload()
+        resetArrows();
         return;
       }
       
@@ -49,25 +49,55 @@ document.addEventListener("DOMContentLoaded", function() {
       this.arrowDOM.style.filter = "drop-shadow(0 0 0.75rem black)";
       this.arrowDOM.src = "../Image_Assets/arrowGreen.png";
       this.arrowDOM.style.zIndex = "4";
-
     }
 
   }
 
-  function endscreen() {
-    
+  function removeElement(ele) {
+    ele.parentNode.removeChild(ele);
+  }
+
+  function deleteArrows() {
+    for (let i = 0; i < arrows.length; i++) {
+      removeElement(arrows[i].arrowDOM);
+    }
+  }
+
+  function resetArrows() {
+    deleteArrows();
+    arrows = [];
+    pointsTo = [];
+    selectedStart = [];
+    positions = [];
+    generateArrows();
   }
 
   function endscreen() {
+    deleteArrows();
+    document.body.style.background = "black";
+    let passwordElement = document.createElement("h1");
+    let passwordNode = document.createTextNode(`${window.arrowsPass}`);
+    passwordElement.appendChild(passwordNode);
+    document.body.appendChild(passwordElement);
 
+    setInterval(() => {
+      if (document.body.style.backgroundColor === 'black') {
+        document.body.style.backgroundColor = 'green';
+      } else {
+        document.body.style.backgroundColor = 'black';
+      }
+    }, 1500);
+    setTimeout(() => {
+      window.location = "../index.html";
+    }, 8900 );
   }
 
   function optimalGridSize() {
     let bestFit = { width: 1, height: 1 };
     let bestImageRatio = Infinity;
 
-    const maxImages = 50;
-    const minImages = 20;
+    const maxImages = 10;
+    const minImages = 5;
 
     for (let cols = 1; cols <= 10000 ; cols++) {
       let rows = Math.round(cols * (window.innerHeight / window.innerWidth));
@@ -144,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
   
-  window.arrowsPass = localStorage.getItem("arrowsPass");
-  console.log(window.arrowsPass)
+  
+  console.log(window.arrowsPass);
   generateArrows();
 });

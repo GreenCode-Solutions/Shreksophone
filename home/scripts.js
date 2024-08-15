@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function activateAnimation(){
     document.getElementById("title").style.animation = "title 3s 1 forwards";
   }
-  
+
   function generateRandomPassword() {
     const chars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM-_=+0987654321!@#$%^&*()~<>?:;";
     const maxChars = 12;
@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     return password;
   }
+  
   function getOrGeneratePassword(key) {
     let password = localStorage.getItem(key);
     if (!password) {
@@ -57,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   window.squaresPass = getOrGeneratePassword("squaresPass");
   window.circlesPass = getOrGeneratePassword("circlesPass");
-  window.arrowsPass = getOrGeneratePassword("ArrowsPass");
+  window.arrowsPass = getOrGeneratePassword("arrowsPass");
 
   function checkPassword(key, userInput, storedPass) {
     if (userInput === storedPass) {
