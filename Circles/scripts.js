@@ -1,4 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
+  if (completed("circles")) {
+    window.location = "../index.html";
+  }
+  
+  function completed(key) {
+    if (localStorage.getItem(key + "Completed") == "true") {
+      return true;
+    } 
+    return false;
+  }
+
   const circles = [];
   let patternCount = 1;
   const possibleCoords = [];

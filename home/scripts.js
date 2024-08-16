@@ -3,12 +3,17 @@ document.addEventListener("DOMContentLoaded", function() {
     button.addEventListener("click", activateAnimation);
   });
 
+  let levels = ['squares', 'circles', 'arrows'];
+  if (completed("squares") && completed("circles") && completed("arrows")) {
+    endScreen()
+  }
+
   let squaresPassUserInput;
   document.getElementById("squaresPass").addEventListener("keydown", (event) => {
     if (event.key == 'Enter') {
       event.preventDefault();
       squaresPassUserInput = event.target.value;
-      checkPassword("squaresButton", squaresPassUserInput, window.squaresPass);
+      checkPassword("squares", squaresPassUserInput, window.squaresPass);
     }
   });
 
@@ -17,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (event.key == 'Enter') {
       event.preventDefault();
       circlesPassUserInput = event.target.value;
-      checkPassword("circlesButton", circlesPassUserInput, window.circlesPass);
+      checkPassword("circles", circlesPassUserInput, window.circlesPass);
 
     }
   });
@@ -27,9 +32,19 @@ document.addEventListener("DOMContentLoaded", function() {
     if (event.key == 'Enter') {
       event.preventDefault();
       arrowsPassUserInput = event.target.value;
-      checkPassword("arrowsButton", arrowsPassUserInput, window.arrowsPass);
+      checkPassword("arrows", arrowsPassUserInput, window.arrowsPass);
     }
   });
+
+  for (let i = 0; i < levels.length; i++) {
+    if (completed(levels[i])) {
+      let button = document.getElementById(levels[i] + "Button");
+      button.parentNode.removeChild(button);
+
+      let textBox = document.getElementById(levels[i] + "Pass");
+      textBox.parentNode.removeChild(textBox);
+    }
+  }
 
   function activateAnimation(){
     document.getElementById("title").style.animation = "title 3s 1 forwards";
@@ -60,16 +75,36 @@ document.addEventListener("DOMContentLoaded", function() {
   window.circlesPass = getOrGeneratePassword("circlesPass");
   window.arrowsPass = getOrGeneratePassword("arrowsPass");
 
-  function checkPassword(key, userInput, storedPass) {
-    if (userInput === storedPass) {
-      console.log(`You got ${key} correct!`);
-      button = document.getElementById(key)
-      button.textContent = "\u00A0";
-      image = document.createElement("img")
-      image.src = "./Image_Assets/arrow.png";
-      button.appendChild(image)
-    };
+  function completed(key) {
+    if (localStorage.getItem(key + "Completed") == "true") {
+      return true;
+    }
+    return false;
   }
+
+  function checkPassword(key, userInput, storedPass) {
+    if (userInput === storedPass || completed(key)) {
+
+      let button = document.getElementById(key + "Button");
+      button.parentNode.removeChild(button);
+
+      let textBox = document.getElementById(key + "Pass");
+      textBox.parentNode.removeChild(textBox);
+
+      localStorage.setItem(key + "Completed", true);
+      if (completed("squares") && completed("circles") && completed("arrows")) {
+        endScreen()
+      }
+    }
+  }
+
+  function endScreen() {
+    window.location = "https://www.youtube.com/watch?v=pxw-5qfJ1dk";
+    // let iframe = document.createElement("iframe");
+    // iframe.src = "https://www.youtube.com/watch?v=pxw-5qfJ1dk";
+    // document.body.appendChild(iframe);
+  }
+
   console.log([window.squaresPass, window.circlesPass, window.arrowsPass]);
 
 });

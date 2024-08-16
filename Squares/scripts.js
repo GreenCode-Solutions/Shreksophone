@@ -1,4 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
+  if (completed("squares")) {
+    window.location = "../index.html";
+  }
+  
+  function completed(key) {
+    if (localStorage.getItem(key + "Completed") == "true") {
+      return true;
+    } 
+    return false;
+  }
+
   let buttons = [];
   let positions = [];
   window.squaresPass = localStorage.getItem("squaresPass");

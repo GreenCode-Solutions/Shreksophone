@@ -1,15 +1,35 @@
 document.addEventListener("DOMContentLoaded", function() {
+  if (completed("arrows")) {
+    window.location = "../index.html";
+  }
+
+  function completed(key) {
+    if (localStorage.getItem(key + "Completed") == "true") {
+      return true;
+    } 
+    return false;
+  }
+
   let arrows = [];
   let screenDimensions = [optimalGridSize().width, optimalGridSize().height];
   let pointsTo = [];
   let selectedStart = [];
   let positions = [];
-  let imgDimensions = [calculateImageDimensions().widthImages, calculateImageDimensions().heightImages];
+  const imgDimensions = [calculateImageDimensions().widthImages, calculateImageDimensions().heightImages];
   window.arrowsPass = localStorage.getItem("arrowsPass");
+  function findFinalArrow() {
+    for (let i = 0; i < arrows.length; i++) {
+      if (arrows[i].next.x == selectedStart.x && arrows[i].next.y == selectedStart.y) {
+         var finalArrow = arrows[i].position;
+         //return finalArrow
+        console.log('Final Arrow:', finalArrow);
+      }
+      console.log("Arrow iteration:", i);
+    }
+    return finalArrow; // Ensure finalArrow is returned if needed elsewhere
+  }
 
-  console.log(imgDimensions[0] / imgDimensions[1]);
-  console.log(screenDimensions);
-  console.log([window.innerWidth, window.innerHeight]);
+  
 
   class Arrow {
     constructor(position = {x:x, y:y}, PointsTo = {x:x, y:y}, arrowDOM = null) {
@@ -28,6 +48,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     onClick() {
+      
+      let finalArrow = findFinalArrow();
       if (pointsTo.length == 0) {
         selectedStart = this.position;
         pointsTo = this.next;
@@ -35,10 +57,11 @@ document.addEventListener("DOMContentLoaded", function() {
         this.arrowDOM.src = "../Image_Assets/arrowGreen.png";
         return;
       }
-
-      if (this.position == selectedStart) {
+      
+      if (this.position == finalArrow) {
         endscreen();
       }
+
       if (this.position != pointsTo) {
         resetArrows();
         return;
@@ -46,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
       
       pointsTo = this.next;
       
-      this.arrowDOM.style.filter = "drop-shadow(0 0 0.75rem black)";
+      this.arrowDOM.style.filter = "drop-shadow(0 0 .75rem black)";
       this.arrowDOM.src = "../Image_Assets/arrowGreen.png";
       this.arrowDOM.style.zIndex = "4";
     }
@@ -97,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let bestImageRatio = Infinity;
 
     const maxImages = 10;
-    const minImages = 5;
+    const minImages = 6;
 
     for (let cols = 1; cols <= 10000 ; cols++) {
       let rows = Math.round(cols * (window.innerHeight / window.innerWidth));
