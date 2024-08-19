@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function() {
   document.querySelectorAll(".button").forEach(button => {
     button.addEventListener("click", activateAnimation);
   });
-
   function encryptPass(pass) {
     const chars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM-_=+0987654321!@#$%^&*()~<>?:;";
     pass = pass.split("")
@@ -131,19 +130,26 @@ document.addEventListener("DOMContentLoaded", function() {
     source.src = "./Video_Assets/shrecksophoneFinalVideo.mp4";
     source.type = "video/mp4";
     video.appendChild(source);
-    video.autoplay = "true"
+
+    video.autoplay = "true";
+    video.loop = "true";
+
     document.body.appendChild(video);
     document.body.style.backgroundColor = "black";
+
     let title = document.getElementById("title");
     title.style.filter = "none";
     title.style.animation = "blink 4s linear infinite forwards";
     title.style.marginTop = "-15vh";
+
     let button = document.createElement("button");
     let text = document.createTextNode("Restart");
     button.appendChild(text);
+
+    button.classList.add("button");
     setTimeout(() => {
       document.body.appendChild(button);
-    }, 10000)
+    }, 10000);
   }
 
   console.log([window.squaresPass, window.circlesPass, window.arrowsPass])

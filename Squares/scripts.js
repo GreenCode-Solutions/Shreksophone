@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function completed(key) {
     if (localStorage.getItem(key + "Completed") == "true") {
       return true;
-    } 
+    }
     return false;
   }
 
@@ -94,8 +94,6 @@ document.addEventListener("DOMContentLoaded", function() {
       setTimeout(function() {
         document.body.style.backgroundColor = "black";
       }, 1000);
-      
-
     }
 
   }
