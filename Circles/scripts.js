@@ -2,23 +2,22 @@ document.addEventListener("DOMContentLoaded", function() {
   if (completed("circles")) {
     window.location = "../index.html";
   }
-  
+
   function completed(key) {
     if (localStorage.getItem(key + "Completed") == "true") {
       return true;
     } 
     return false;
   }
-
+ 
   const circles = [];
   let patternCount = 1;
   const possibleCoords = [];
-  let pattern = []
+  let pattern = [];
   const gridSize = [optimalGridSize().width, optimalGridSize().height];
   const circleCount = gridSize[0] * gridSize[1];
   let patternDisplaying = false;
-  window.circlesPass = localStorage.getItem("circlesPass"); 
-
+  window.circlesPass = decryptPass(localStorage.getItem("circlesPass")); 
   class Circle {
     constructor(posX, posY, circleDOM) {
       this.posX = posX;
@@ -39,16 +38,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     onClick() {
       if (patternDisplaying) {
-        location.reload();
+        resetPattern();
       }
 
-      endScreen();
       if (this.posX == pattern[0][0] && this.posY == pattern[0][1]) {
         pattern.splice(0, 1);
         if (pattern.length == 0) {
           patternCount++;
           if (patternCount >= circleCount) {
-            endScreen();  // remember to add the password idea later
+            endScreen(); 
           }
           displayPattern(generatePattern());
         }
@@ -68,8 +66,8 @@ document.addEventListener("DOMContentLoaded", function() {
   function optimalGridSize() {
     let bestFit = { width: 1, height: 1 };
     let bestImageRatio = Infinity;
-    const maxCircles = 1;
-    const minCircles = 1;
+    const maxCircles = 50;
+    const minCircles = 40;
 
     for (let cols = 1; cols <= maxCircles; cols++) {
       let rows = Math.round(cols * (window.innerHeight / window.innerWidth));
@@ -89,6 +87,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function removeElement(ele) {
     ele.parentNode.removeChild(ele);
+  }
+
+  function decryptPass(pass) {
+    pass = pass.split("");
+    strpass = "";
+    for (let i = 0; i < pass.length; i++) {
+      pass.splice(i, 1);
+    }
+    for (let i = 0; i < pass.length; i++) {
+      strpass += pass[i];
+    }
+    return strpass;
   }
 
   function endScreen() {
@@ -178,9 +188,9 @@ document.addEventListener("DOMContentLoaded", function() {
   function resetPattern() {
     patternDisplaying = false;
     patternCount = 1;
-    pattern = []; // Clear the current pattern
-    circles.forEach(circle => circle.circleDOM.style.animation = "none"); // Clear all animations
-    displayPattern(generatePattern()); // Restart with a new pattern
+    pattern = []; 
+    circles.forEach(circle => circle.circleDOM.style.animation = "none"); 
+    displayPattern(generatePattern()); 
   }
   
 

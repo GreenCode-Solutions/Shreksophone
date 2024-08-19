@@ -3,9 +3,34 @@ document.addEventListener("DOMContentLoaded", function() {
     button.addEventListener("click", activateAnimation);
   });
 
+  function encryptPass(pass) {
+    const chars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM-_=+0987654321!@#$%^&*()~<>?:;";
+    pass = pass.split("")
+    strpass = "";
+    for (let i = 0; i < pass.length; i += 2) {
+      pass.splice(i, 0, chars[Math.floor(Math.random() * chars.length)]);
+    }
+    for (let i = 0; i < pass.length; i++) {
+      strpass += pass[i];
+    }
+    return strpass;
+  }
+
+  function decryptPass(pass) {
+    pass = pass.split("");
+    strpass = "";
+    for (let i = 0; i < pass.length; i++) {
+      pass.splice(i, 1);
+    }
+    for (let i = 0; i < pass.length; i++) {
+      strpass += pass[i];
+    }
+    return strpass;
+  }
+
   let levels = ['squares', 'circles', 'arrows'];
   if (completed("squares") && completed("circles") && completed("arrows")) {
-    endScreen()
+    endScreen();
   }
 
   let squaresPassUserInput;
@@ -63,12 +88,13 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   
   function getOrGeneratePassword(key) {
-    let password = localStorage.getItem(key);
-    if (!password) {
-      password = generateRandomPassword();
-      localStorage.setItem(key, password);
+    if (localStorage.getItem(key) == null) {
+      let password = generateRandomPassword();
+      localStorage.setItem(key, encryptPass(password));
+      return password;
     }
-    return password;
+
+    return decryptPass(localStorage.getItem(key));
   }
 
   window.squaresPass = getOrGeneratePassword("squaresPass");
@@ -82,6 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
     return false;
   }
 
+
   function checkPassword(key, userInput, storedPass) {
     if (userInput === storedPass || completed(key)) {
 
@@ -93,18 +120,31 @@ document.addEventListener("DOMContentLoaded", function() {
 
       localStorage.setItem(key + "Completed", true);
       if (completed("squares") && completed("circles") && completed("arrows")) {
-        endScreen()
+        endScreen();
       }
     }
   }
 
   function endScreen() {
-    window.location = "https://www.youtube.com/watch?v=pxw-5qfJ1dk";
-    // let iframe = document.createElement("iframe");
-    // iframe.src = "https://www.youtube.com/watch?v=pxw-5qfJ1dk";
-    // document.body.appendChild(iframe);
+    let video = document.createElement("video");
+    let source = document.createElement("source");
+    source.src = "./Video_Assets/shrecksophoneFinalVideo.mp4";
+    source.type = "video/mp4";
+    video.appendChild(source);
+    video.autoplay = "true"
+    document.body.appendChild(video);
+    document.body.style.backgroundColor = "black";
+    let title = document.getElementById("title");
+    title.style.filter = "none";
+    title.style.animation = "blink 4s linear infinite forwards";
+    title.style.marginTop = "-15vh";
+    let button = document.createElement("button");
+    let text = document.createTextNode("Restart");
+    button.appendChild(text);
+    setTimeout(() => {
+      document.body.appendChild(button);
+    }, 10000)
   }
 
-  console.log([window.squaresPass, window.circlesPass, window.arrowsPass]);
-
+  console.log([window.squaresPass, window.circlesPass, window.arrowsPass])
 });

@@ -15,8 +15,9 @@ body {
 #title {
     width: 100%;
     font-size: 6.75vw;
-    filter: drop-shadow(0 0 10px rgb(0, 255, 0));
+    filter: drop-shadow(0 0 1vmin rgb(0, 255, 0));
     margin-bottom:1%;
+    z-index: 999999;
 }
 
 .container {
@@ -67,22 +68,24 @@ body {
     filter: drop-shadow(0 0 0.75rem black);
 }
 
-iframe {
-    position:fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
+video {
+    position: fixed;
+    top: 0; left: 0;
+    bottom: 0; right: 0;
+    width: 100%; height: 100%;
     border: none;
-    margin: 0;
-    padding: 0;
+    margin: 0; padding: 0;
     overflow: hidden;
-    z-index: 999999;
+    z-index: -1000;
+    object-fit: cover;
+} 
+
+@keyframes blink {
+    0%, 100% {color: green;}
+    50% {color: black;}
 }
 
 @keyframes title {
-    10% {transform: translate(0%, 5vh);}
+    10% {transform: translate(0%, 10px);}
     100%{transform: translate(0%, -110vh);}
 }

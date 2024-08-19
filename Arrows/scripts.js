@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+  console.log(localStorage.getItem("arrowsPass"))
   if (completed("arrows")) {
     window.location = "../index.html";
   }
@@ -16,7 +17,9 @@ document.addEventListener("DOMContentLoaded", function() {
   let selectedStart = [];
   let positions = [];
   const imgDimensions = [calculateImageDimensions().widthImages, calculateImageDimensions().heightImages];
-  window.arrowsPass = localStorage.getItem("arrowsPass");
+  
+  window.arrowsPass = decryptPass(localStorage.getItem("arrowsPass"));
+
   function findFinalArrow() {
     for (let i = 0; i < arrows.length; i++) {
       if (arrows[i].next.x == selectedStart.x && arrows[i].next.y == selectedStart.y) {
@@ -29,7 +32,17 @@ document.addEventListener("DOMContentLoaded", function() {
     return finalArrow; // Ensure finalArrow is returned if needed elsewhere
   }
 
-  
+  function decryptPass(pass) {
+    pass = pass.split("");
+    strpass = "";
+    for (let i = 0; i < pass.length; i++) {
+      pass.splice(i, 1);
+    }
+    for (let i = 0; i < pass.length; i++) {
+      strpass += pass[i];
+    }
+    return strpass;
+  }
 
   class Arrow {
     constructor(position = {x:x, y:y}, PointsTo = {x:x, y:y}, arrowDOM = null) {
@@ -119,8 +132,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let bestFit = { width: 1, height: 1 };
     let bestImageRatio = Infinity;
 
-    const maxImages = 10;
-    const minImages = 6;
+    const maxImages = 70;
+    const minImages = 50;
 
     for (let cols = 1; cols <= 10000 ; cols++) {
       let rows = Math.round(cols * (window.innerHeight / window.innerWidth));

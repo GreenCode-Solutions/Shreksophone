@@ -10,9 +10,22 @@ document.addEventListener("DOMContentLoaded", function() {
     return false;
   }
 
+  function decryptPass(pass) {
+    pass = pass.split("")
+    strpass = "";
+    for (let i = 0; i < pass.length; i++) {
+      console.log(pass.length);
+      pass.splice(i, 1);
+    }
+    for (let i = 0; i < pass.length; i++) {
+      strpass += pass[i];
+    }
+    return strpass
+  }
+
   let buttons = [];
   let positions = [];
-  window.squaresPass = localStorage.getItem("squaresPass");
+  window.squaresPass = decryptPass(localStorage.getItem("squaresPass"));
 
   function makePositions() {
     for (let x = 0; x < 8; x++) {
@@ -123,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   }
 
-  window.squaresPass = localStorage.getItem("squaresPass");
+  window.squaresPass = decryptPass(localStorage.getItem("squaresPass"));
 
   addNewButton();
 });
