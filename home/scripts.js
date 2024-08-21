@@ -127,11 +127,10 @@ document.addEventListener("DOMContentLoaded", function() {
   function endScreen() {
     let video = document.createElement("video");
     let source = document.createElement("source");
-    source.src = "./Video_Assets/shrecksophoneFinalVideo.mp4";
+    source.src = "./Video_Assets/shreksophoneFinalVideo.mp4";
     source.type = "video/mp4";
     video.appendChild(source);
 
-    video.autoplay = "true";
     video.loop = "true";
 
     document.body.appendChild(video);
@@ -145,11 +144,38 @@ document.addEventListener("DOMContentLoaded", function() {
     let button = document.createElement("button");
     let text = document.createTextNode("Restart");
     button.appendChild(text);
+    button.addEventListener("click", resetGame);
+
+    let playButton = document.createElement("button");
+    playButton.textContent = "Play Video";
+    playButton.classList.add("button");
+    
+
+    playButton.addEventListener("click", function() {
+      video.play().then(() => {
+        playButton.style.display = "none";
+        setTimeout(() => {
+          document.body.appendChild(button);
+        }, 15600);
+      }).catch(error => {
+        console.error("Video play failed", error);
+      });
+    });
+
+    document.body.appendChild(playButton);
 
     button.classList.add("button");
-    setTimeout(() => {
-      document.body.appendChild(button);
-    }, 10000);
+
+    video.addEventListener("timeupdate", () => {
+      if (video.currentTime >= 76.97) {
+        video.currentTime = 15.670;
+      }
+    });
+  }
+
+  function resetGame() {
+    localStorage.clear();
+    location.reload()
   }
 
   console.log([window.squaresPass, window.circlesPass, window.arrowsPass])

@@ -66,8 +66,8 @@ document.addEventListener("DOMContentLoaded", function() {
   function optimalGridSize() {
     let bestFit = { width: 1, height: 1 };
     let bestImageRatio = Infinity;
-    const maxCircles = 50;
-    const minCircles = 40;
+    const maxCircles = 10; //50
+    const minCircles = 5; //40
 
     for (let cols = 1; cols <= maxCircles; cols++) {
       let rows = Math.round(cols * (window.innerHeight / window.innerWidth));
