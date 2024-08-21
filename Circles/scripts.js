@@ -18,13 +18,13 @@ document.addEventListener("DOMContentLoaded", function() {
   const circleCount = gridSize[0] * gridSize[1];
   let patternDisplaying = false;
   window.circlesPass = decryptPass(localStorage.getItem("circlesPass")); 
+
   class Circle {
     constructor(posX, posY, circleDOM) {
       this.posX = posX;
       this.posY = posY;
       this.circleDOM = circleDOM;
 
-      // Example onClick method, you can define your own logic
       this.circleDOM.addEventListener("click", () => this.onClick());
     }
 
@@ -38,27 +38,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
     onClick() {
       if (patternDisplaying) {
-        resetPattern();
+        return
       }
 
       if (this.posX == pattern[0][0] && this.posY == pattern[0][1]) {
         pattern.splice(0, 1);
         if (pattern.length == 0) {
           patternCount++;
-          if (patternCount >= circleCount) {
+          if (patternCount - 1 >= circleCount) {
             endScreen(); 
+          } else {
+            displayPattern(generatePattern());
           }
-          displayPattern(generatePattern());
         }
       } else {
         resetPattern();
       }
-
-
     }
 
     highlight() {
       this.circleDOM.style.animation = "none";
+      this.circleDOM.offsetHeight;
       this.circleDOM.style.animation = "highlight .5s ease-out 1 forwards";
     }
   }
@@ -66,8 +66,8 @@ document.addEventListener("DOMContentLoaded", function() {
   function optimalGridSize() {
     let bestFit = { width: 1, height: 1 };
     let bestImageRatio = Infinity;
-    const maxCircles = 10; //50
-    const minCircles = 5; //40
+    const maxCircles = 50;
+    const minCircles = 30;
 
     for (let cols = 1; cols <= maxCircles; cols++) {
       let rows = Math.round(cols * (window.innerHeight / window.innerWidth));
@@ -156,7 +156,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function generatePattern() {
     pattern = [];
-    let avialibleCoords = possibleCoords;
+    let avialibleCoords = [...possibleCoords];
+
     for (let i = 0; i < patternCount; i++) {
       let randCoord = randomArrayElement(avialibleCoords);
       pattern.push(randCoord);
@@ -173,7 +174,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const [x, y] = pattern[index];
     const circle = circles.find(c => c.x === x && c.y === y);
-
     if (circle) {
       circle.highlight();
       setTimeout(() => showPatternStep(pattern, index + 1), 500);
@@ -189,8 +189,7 @@ document.addEventListener("DOMContentLoaded", function() {
     patternDisplaying = false;
     patternCount = 1;
     pattern = []; 
-    circles.forEach(circle => circle.circleDOM.style.animation = "none"); 
-    displayPattern(generatePattern()); 
+    displayPattern(generatePattern())
   }
   
 

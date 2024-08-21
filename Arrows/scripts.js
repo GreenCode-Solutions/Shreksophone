@@ -132,8 +132,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let bestFit = { width: 1, height: 1 };
     let bestImageRatio = Infinity;
 
-    const maxImages = 70;
-    const minImages = 50;
+    const maxImages = 10; //70
+    const minImages = 5; //50
 
     for (let cols = 1; cols <= 10000 ; cols++) {
       let rows = Math.round(cols * (window.innerHeight / window.innerWidth));

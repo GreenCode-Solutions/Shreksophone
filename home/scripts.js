@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function() {
         playButton.style.display = "none";
         setTimeout(() => {
           document.body.appendChild(button);
-        }, 15600);
+        }, 15700);
       }).catch(error => {
         console.error("Video play failed", error);
       });
@@ -165,9 +165,8 @@ document.addEventListener("DOMContentLoaded", function() {
     document.body.appendChild(playButton);
 
     button.classList.add("button");
-
     video.addEventListener("timeupdate", () => {
-      if (video.currentTime >= 76.97) {
+      if (video.currentTime >= 76.87) {
         video.currentTime = 15.670;
       }
     });
