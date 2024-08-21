@@ -12,6 +12,10 @@ body {
     overflow: hidden;
 }
 
+* {
+    outline: 0;
+}
+
 #title {
     width: 100%;
     font-size: 6.75vw;

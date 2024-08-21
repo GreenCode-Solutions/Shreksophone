@@ -1,13 +1,18 @@
 body {
   background-color: green;
 }
+
+* {
+  outline: 0;
+}
+
 div {
   border-radius: 100%;
   position: absolute;
   border: none;
   background-color: rgb(32, 164, 32);
-  
 }
+
 h1 {
   font-size: 8vw;
   position: absolute;
@@ -21,6 +26,7 @@ h1 {
   padding: 0;
   animation: password 3s step-end infinite normal forwards;
 }
+
 @keyframes password {
   0%, 100% {
     color: green;
@@ -29,6 +35,7 @@ h1 {
     color: black;
   }
 }
+
 @keyframes highlight {
   from {background-color: rgb(246, 246, 246);}
   to {background-color: rgb(32, 164, 32);}

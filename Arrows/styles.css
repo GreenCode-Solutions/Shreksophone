@@ -2,13 +2,20 @@ body {
   background-color: green;
   overflow: hidden;
 }
+
+* {
+  outline: 0;
+}
+
 img {
   position:absolute;
   border-radius: 100%;
 }
+
 .arrow {
   position: absolute;
 }
+
 h1 {
   font-size: 8vw;
   position: absolute;
@@ -22,6 +29,7 @@ h1 {
   padding: 0; /* Remove any padding */
   animation: password 3s step-end infinite normal forwards;
 }
+
 @keyframes password {
   0%, 100% {
     color: green;

@@ -1,9 +1,12 @@
-
-
 body {
   background-color: black;
 
 }
+
+* {
+  outline: 0;
+}
+
 button {
   height: calc(100vh / 8);
   width: calc(100vw / 8);
@@ -27,6 +30,7 @@ h1 {
   padding: 0; /* Remove any padding */
   animation: password 3s step-end infinite normal forwards;
 }
+
 @keyframes password {
   0%, 100% {
     color: green;

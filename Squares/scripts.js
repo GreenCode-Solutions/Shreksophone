@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
     pass = pass.split("")
     strpass = "";
     for (let i = 0; i < pass.length; i++) {
-      console.log(pass.length);
       pass.splice(i, 1);
     }
     for (let i = 0; i < pass.length; i++) {
@@ -79,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let button = document.createElement("button");
     button.style.left = `calc(${100 * x / 8}vw)`;
     button.style.top = `calc(${100 * y / 8}vh)`;
+    button.tabIndex = '-1';
 
     button.addEventListener("click", addNewButton);
 

@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-  console.log(localStorage.getItem("arrowsPass"))
   if (completed("arrows")) {
     window.location = "../index.html";
   }
@@ -24,12 +23,10 @@ document.addEventListener("DOMContentLoaded", function() {
     for (let i = 0; i < arrows.length; i++) {
       if (arrows[i].next.x == selectedStart.x && arrows[i].next.y == selectedStart.y) {
          var finalArrow = arrows[i].position;
-         //return finalArrow
-        console.log('Final Arrow:', finalArrow);
+
       }
-      console.log("Arrow iteration:", i);
     }
-    return finalArrow; // Ensure finalArrow is returned if needed elsewhere
+    return finalArrow;
   }
 
   function decryptPass(pass) {
@@ -211,6 +208,5 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   
   
-  console.log(window.arrowsPass);
   generateArrows();
 });

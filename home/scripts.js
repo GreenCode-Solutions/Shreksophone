@@ -176,6 +176,4 @@ document.addEventListener("DOMContentLoaded", function() {
     localStorage.clear();
     location.reload()
   }
-
-  console.log([window.squaresPass, window.circlesPass, window.arrowsPass])
 });
