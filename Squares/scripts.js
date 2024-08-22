@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   let buttons = [];
   let positions = [];
+  const numberOfButtons = 64;
   window.squaresPass = decryptPass(localStorage.getItem("squaresPass"));
 
   function makePositions() {
@@ -35,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   makePositions()
-  shuffleArray(positions);
+  positions = shuffleArray(positions);
 
   class Button {
     constructor(posX, posY, buttonDOM) {
@@ -59,10 +60,45 @@ document.addEventListener("DOMContentLoaded", function() {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
+    return array;
   }
 
   function removeElement(ele) {
     ele.parentNode.removeChild(ele);
+  }
+
+  function generateButtons() {
+    for (let i = 0; i < numberOfButtons; i++) {
+      let { x, y } = positions[i];
+
+      let button = document.createElement("button");
+      button.style.left = `calc(${100 * x / 8}vw)`;
+      button.style.top = `calc(${100 * y / 8}vh)`;
+      button.tabIndex = '-1';
+      button.display = "none";
+
+      buttons.push(new Button(x, y, button));
+    }
+    for (let i = 0; i < numberOfButtons; i++) {
+      let shuffledButtons = shuffleArray(buttons);
+      document.body.appendChild(shuffledButtons[i].buttonDOM);
+    }
+
+    addNewButtonTest();
+
+  }
+
+  function addNewButtonTest() {
+    let { x, y } = positions.pop()
+    let newButton;
+    for (let i = 0; i < numberOfButtons; i++) {
+      if (buttons[i].x == x && buttons[i].y == y) {
+        newButton = buttons[i];
+        break;
+      }
+    }
+    newButton.buttonDOM.style.display = "auto";
+
   }
 
   function addNewButton() {
@@ -100,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function endScreen() {
     for (let i = 0; i < buttons.length; i++) {
-      removeElement(buttons[i].button); 
+      removeElement(buttons[i].buttonDOM); 
     }
     document.body.style.background = "black";
     let passwordElement = document.createElement("h1");
@@ -122,14 +158,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function resetButtons() {
     for (let i = 0; i < buttons.length; i++) {
-      removeElement(buttons[i].button); 
+      removeElement(buttons[i].buttonDOM); 
     }
 
     buttons = [];
     positions = [];
     makePositions();
-    
-    shuffleArray(positions);
+    positions = shuffleArray(positions);
     addNewButton();
 
   }

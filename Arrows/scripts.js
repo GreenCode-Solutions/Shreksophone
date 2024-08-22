@@ -42,10 +42,11 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   class Arrow {
-    constructor(position = {x:x, y:y}, PointsTo = {x:x, y:y}, arrowDOM = null) {
+    constructor(position = {x:x, y:y}, PointsTo = {x:x, y:y}, arrowDOM = null, clicked = false) {
       this.position = position;
       this.next = PointsTo;
       this.arrowDOM = arrowDOM;
+      this.clicked = clicked;
     }
 
     compileTilt() {
@@ -60,6 +61,8 @@ document.addEventListener("DOMContentLoaded", function() {
     onClick() {
       
       let finalArrow = findFinalArrow();
+      let arrowsClicked = 0;
+      this.clicked = true;
       if (pointsTo.length == 0) {
         selectedStart = this.position;
         pointsTo = this.next;
@@ -67,9 +70,17 @@ document.addEventListener("DOMContentLoaded", function() {
         this.arrowDOM.src = "../Image_Assets/arrowGreen.png";
         return;
       }
-      
-      if (this.position == finalArrow) {
+
+      for (let i = 0; i < arrows.length; i++){
+        if (arrows[i].clicked == true) {
+          arrowsClicked++;
+        }
+      }
+
+      console.log(arrows)
+      if (this.position == finalArrow && arrowsClicked == arrows.length) {
         endscreen();
+        return;
       }
 
       if (this.position != pointsTo) {
@@ -129,8 +140,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let bestFit = { width: 1, height: 1 };
     let bestImageRatio = Infinity;
 
-    const maxImages = 10; //70
-    const minImages = 5; //50
+    const maxImages = 50; //70
+    const minImages = 30; //50
 
     for (let cols = 1; cols <= 10000 ; cols++) {
       let rows = Math.round(cols * (window.innerHeight / window.innerWidth));
@@ -155,6 +166,14 @@ document.addEventListener("DOMContentLoaded", function() {
     let heightImages = window.innerHeight / screenDimensions[1];
     return { widthImages, heightImages };
   }
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array
+  }
   
   function makePositions() {
     for (let x = 0; x < screenDimensions[0]; x++) {
@@ -162,15 +181,7 @@ document.addEventListener("DOMContentLoaded", function() {
         positions.push({ x: x, y: y });
       }
     }
-
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-    }
-
-    shuffleArray(positions);
+    positions = shuffleArray(positions);
   }
 
   function generateArrows() {
@@ -185,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function() {
       arrowDOM.src = "../Image_Assets/arrow.png";
       arrowDOM.style.width = `${imgDimensions[0]}px`;
       arrowDOM.style.height = `${imgDimensions[1]}px`;
-      document.body.appendChild(arrowDOM);
+      //document.body.appendChild(arrowDOM);
 
       let nextPosition;
       if (i == positions.length - 1) {
@@ -202,8 +213,13 @@ document.addEventListener("DOMContentLoaded", function() {
         slope: ${positions[i].y - nextPosition.y} / ${positions[i].x - nextPosition.x}`);
 
       arrowDOM.addEventListener('click', () => arrow.onClick());
-      arrow.arrowDOM.appendChild(node);
       arrows.push(arrow);
+      //arrow.arrowDOM.appendChild(node);
+    }
+    let shuffledArrows = shuffleArray(arrows);
+    console.log(shuffledArrows)
+    for (let i = 0; i < shuffledArrows.length; i++) {
+      document.body.appendChild(shuffledArrows[i].arrowDOM);
     }
   }
   
