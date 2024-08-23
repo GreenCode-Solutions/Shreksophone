@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta description="This is a portfolio project for GreenCode Solutions, help yourself around! Be sure to checkout our company, we sometimes offer free freelance projects if you're lucky (paid requests get priority)!">
-  <title>Shreksophone the Second Coming</title>
-  <link rel="stylesheet" href="home/styles.css">
-  <link rel="icon" type="image/x-icon" href="https://static.miraheze.org/greatcharacterswiki/thumb/9/9b/GoodShrekImage.png/800px-GoodShrekImage.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta description="This is a portfolio project for GreenCode Solutions, help yourself around! Be sure to checkout our company, we sometimes offer free freelance projects if you're lucky (paid requests get priority)!">
+    <title>Shreksophone the Second Coming</title>
+    <link rel="stylesheet" href="home/styles.css">
+    <link rel="icon" type="image/x-icon" href="Image_Assets/ShrekImage.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
+  </head>
 <body>
+  <div class="container">
+    <h1 id="title">Shreksophone 2</h1>
+    <a href="javascript:setTimeout(()=>{window.location = 'Squares/main.html' }, 2000);">
+      <button class="button" id="squaresButton">Squares</button>
+    </a>
+    <a href="javascript:setTimeout(()=>{window.location = 'Circles/main.html' }, 2000);">
+      <button class="button" id="circlesButton">Circles</button>
+    </a>
+    <a href="javascript:setTimeout(()=>{window.location = 'Arrows/main.html' }, 2000);">
+      <button class="button" id="arrowsButton">Arrows</button>
+    </a>
+    <br><br>
+    <div class="input-fields">
+      <input type="password" id="squaresPass">
+      <input type="password" id="circlesPass">
+      <input type="password" id="arrowsPass">
+    </div>
+  </div>
   <script src="home/scripts.js"></script>
-  <h1 class="title" id="title">Shreksophone 2</h1>
-  <a href="javascript:setTimeout(()=>{window.location = 'Level 1/main.html' }, 2500);">
-    <button class="button" id="button">Start</button>
-  </a>
 </body>
 </html>

@@ -1,0 +1,41 @@
+body {
+  background-color: black;
+
+}
+
+* {
+  outline: 0;
+}
+
+button {
+  height: calc(100vh / 8);
+  width: calc(100vw / 8);
+  background-color: green;
+  position: absolute;
+  padding: 0%;
+  margin: 0%;
+  border: none;
+}
+
+h1 {
+  font-size: 8vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the element */
+  text-align: center;
+  color: green;
+  font-style: italic;
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove any padding */
+  animation: password 3s step-end infinite normal forwards;
+}
+
+@keyframes password {
+  0%, 100% {
+    color: green;
+  }
+  50% {
+    color: black;
+  }
+}
