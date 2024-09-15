@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
+  resetTitleAnimation();
   document.querySelectorAll(".button").forEach(button => {
     button.addEventListener("click", activateAnimation);
   });
   function encryptPass(pass) {
     const chars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM-_=+0987654321!@#$%^&*()~<>?:;";
-    pass = pass.split("")
+    pass = pass.split("");
     strpass = "";
     for (let i = 0; i < pass.length; i += 2) {
       pass.splice(i, 0, chars[Math.floor(Math.random() * chars.length)]);
@@ -175,5 +176,13 @@ document.addEventListener("DOMContentLoaded", function() {
   function resetGame() {
     localStorage.clear();
     location.reload()
+  }
+
+  function resetTitleAnimation() {
+    const title = document.getElementById("title");
+    title.style.animation = "none";
+    setTimeout(() => {
+      title.style.animation = "";
+    }, 10);
   }
 });
